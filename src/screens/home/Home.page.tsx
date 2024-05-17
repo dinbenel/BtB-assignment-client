@@ -1,5 +1,11 @@
+import SideMenu from "@/shared/SideMenu/SideMenu.component";
+
 const Home = () => {
-  return <section className="">HOME</section>;
+  return (
+    <section className="">
+      <SideMenu />
+    </section>
+  );
 };
 
 export default Home;

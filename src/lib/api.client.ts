@@ -1,29 +1,51 @@
 import { config } from "@/config";
-import axios from "axios";
+import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 
-export const axiosClient = axios.create({
-  baseURL: config.loginUrl,
-  timeout: config.timeout,
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+class AxiosClient {
+  private axiosInstance: AxiosInstance;
 
-axiosClient.interceptors.request.use(function (config) {
-  // if (token) {
-  //   config.headers.Authorization = 'Bearer ' + token;
-  // }
-  return config;
-});
+  constructor(url: string) {
+    this.axiosInstance = axios.create({
+      baseURL: url,
+      timeout: config.timeout,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-axiosClient.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  (error) => {
-    // all error codes use cases
-    if (!error || (error.response && error.response.status === 401)) {
-    }
-    return Promise.reject(error);
+    this.initializeRequestInterceptor();
+    this.initializeResponseInterceptor();
   }
-);
+
+  private initializeRequestInterceptor() {
+    this.axiosInstance.interceptors.request.use(
+      (config) => {
+        return config;
+      },
+      (error: AxiosError) => {
+        return Promise.reject(error);
+      }
+    );
+  }
+
+  private initializeResponseInterceptor() {
+    this.axiosInstance.interceptors.response.use(
+      (response: AxiosResponse) => response,
+      (error: AxiosError) => {
+        // Handle error cases
+        if (!error || (error.response && error.response.status === 401)) {
+        }
+        return Promise.reject(error);
+      }
+    );
+  }
+
+  public get instance(): AxiosInstance {
+    return this.axiosInstance;
+  }
+}
+
+const authClient = new AxiosClient(config.loginUrl);
+const dataClient = new AxiosClient(config.baseUrl);
+
+export { authClient, dataClient };
