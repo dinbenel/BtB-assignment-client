@@ -7,8 +7,19 @@ import {
 } from "@/shared/ui/card";
 
 import LoginForm from "./components/LoginForm.component";
+import { useEffect } from "react";
+import { useUserStore } from "@/store/user.store";
+import { useNavigate } from "react-router-dom";
+import { routeNames } from "@/constants/routeNames";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const user = useUserStore((state) => state.loggedUser);
+  useEffect(() => {
+    if (user) {
+      navigate(routeNames.home);
+    }
+  }, [user]);
   return (
     <div>
       <Card className="w-full max-w-sm">

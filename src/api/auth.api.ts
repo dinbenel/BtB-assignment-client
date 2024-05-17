@@ -1,11 +1,21 @@
 import { authApiPath } from "@/constants/apiPathNames";
+import { useUserStore } from "@/store/user.store";
+import { IUser, IUserResponse } from "@/types/user.type";
+import { loginFormState } from "@/validations/loginValidation";
 import { axiosClient } from "../lib/api.client";
 
 class AuthApi {
-  httpClient = axiosClient;
+  login(formState: loginFormState) {
+    return axiosClient.post<IUserResponse>(authApiPath.login, formState);
+  }
 
-  login(email: string) {
-    return this.httpClient.post(authApiPath.login, { email });
+  getUserData() {
+    const token = useUserStore.getState().token || "";
+    return axiosClient.get<IUser>(authApiPath.userData, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
   }
 }
 

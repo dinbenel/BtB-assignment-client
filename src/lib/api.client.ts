@@ -2,7 +2,7 @@ import { config } from "@/config";
 import axios from "axios";
 
 export const axiosClient = axios.create({
-  baseURL: config.baseUrl,
+  baseURL: config.loginUrl,
   timeout: config.timeout,
   headers: {
     "Content-Type": "application/json",

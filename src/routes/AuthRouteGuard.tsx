@@ -1,9 +1,11 @@
 import { routeNames } from "@/constants/routeNames";
+import { useUserStore } from "@/store/user.store";
 import { Navigate, Outlet } from "react-router-dom";
 
 const AuthRouteGuard = () => {
-  const t = 2;
-  return <>{t > 1 ? <Outlet /> : <Navigate to={routeNames.login} />}</>;
+  const user = useUserStore((state) => state.loggedUser);
+
+  return <>{user ? <Outlet /> : <Navigate to={routeNames.login} />}</>;
 };
 
 export default AuthRouteGuard;

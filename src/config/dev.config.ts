@@ -3,4 +3,5 @@ export const devConfig = {
   loginUrl: "http://localhost:8000/api",
   defaultDateFormat: "dd/MM/yyyy",
   timeout: 60000,
+  tokenStorageKey: "accessToken",
 };

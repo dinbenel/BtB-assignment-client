@@ -1,14 +1,16 @@
+import { loginPageStr } from "@/constants/stringRes";
 import FormTextInput from "@/shared/FormTextInput/FormTextInput.component";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "@/shared/ui/button";
+import { useUserStore } from "@/store/user.store";
 import {
   LoginValidationSchema,
   loginFormState,
 } from "@/validations/loginValidation";
-import { Button } from "@/shared/ui/button";
-import { loginPageStr } from "@/constants/stringRes";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
 const LoginForm = () => {
+  const login = useUserStore((state) => state.login);
   const {
     control,
     formState: { errors },
@@ -21,10 +23,10 @@ const LoginForm = () => {
     },
   });
 
-  const onLogin: SubmitHandler<loginFormState> = (formState) => {
-    console.log(formState);
+  const onLogin: SubmitHandler<loginFormState> = async (formState) => {
+    await login(formState);
   };
-  console.log(errors);
+
   return (
     <form onSubmit={handleSubmit(onLogin)}>
       <Controller

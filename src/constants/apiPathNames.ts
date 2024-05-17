@@ -1,3 +1,4 @@
 export const authApiPath = {
-  login: "/user",
+  login: "/auth/login",
+  userData: "/auth/logged-user",
 };

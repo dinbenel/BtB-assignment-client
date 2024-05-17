@@ -14,7 +14,6 @@ const router = createBrowserRouter([
       {
         path: routeNames.home,
         element: <AuthRouteGuard />,
-
         children: [
           {
             index: true,
