@@ -23,7 +23,7 @@ interface Origin {
   url: string;
 }
 
-interface IResInfo {
+export interface IResInfo {
   count: number;
   pages: number;
   next: string;

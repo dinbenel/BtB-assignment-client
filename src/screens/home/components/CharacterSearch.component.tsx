@@ -9,12 +9,15 @@ import { characterPageStr } from "@/constants/stringRes";
 import FormTextInput from "@/shared/FormTextInput/FormTextInput.component";
 import FormSelectInput from "@/shared/FormSelectInput/FormSelectInput.component";
 import { cn } from "@/utils/style";
+import { useCharacterStore } from "@/store/character.store";
 
 const CharacterSearch = () => {
+  const getAllCharacters = useCharacterStore((state) => state.getAllCharacters);
   const {
     control,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm<SearchFormState>({
     resolver: zodResolver(SearchCharacterValidationSchema),
     defaultValues: {
@@ -27,7 +30,8 @@ const CharacterSearch = () => {
   });
 
   const onSearch: SubmitHandler<SearchFormState> = async (formState) => {
-    console.log(formState);
+    await getAllCharacters(formState);
+    reset();
   };
 
   return (
@@ -44,7 +48,7 @@ const CharacterSearch = () => {
           render={({ field }) => {
             return (
               <FormTextInput
-                className=""
+                className="ring-transparent"
                 label={characterPageStr.name}
                 error={errors[field.name]?.message}
                 {...field}
@@ -58,7 +62,7 @@ const CharacterSearch = () => {
           render={({ field }) => {
             return (
               <FormTextInput
-                className=""
+                className="ring-transparent"
                 label={characterPageStr.species}
                 error={errors[field.name]?.message}
                 {...field}
@@ -72,7 +76,7 @@ const CharacterSearch = () => {
           render={({ field }) => {
             return (
               <FormTextInput
-                className=""
+                className="ring-transparent"
                 label={characterPageStr.type}
                 error={errors[field.name]?.message}
                 {...field}
