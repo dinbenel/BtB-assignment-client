@@ -12,3 +12,12 @@ export const headerStr = {
   title: "rick&morty info",
   logOut: "logout",
 } as const;
+
+export const characterPageStr = {
+  gender: "gender",
+  name: "name",
+  species: "species",
+  status: "status",
+  type: "type",
+  search: "search",
+} as const;

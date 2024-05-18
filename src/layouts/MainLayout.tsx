@@ -3,12 +3,12 @@ import { Outlet } from "react-router-dom";
 
 const MainLayout = () => {
   return (
-    <>
+    <div className="">
       <Header />
-      <main className="container">
+      <main className="container h-full">
         <Outlet />
       </main>
-    </>
+    </div>
   );
 };
 

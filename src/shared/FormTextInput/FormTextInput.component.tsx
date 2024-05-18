@@ -9,7 +9,7 @@ type Props = {
 } & InputHTMLAttributes<HTMLInputElement>;
 
 const FormTextInput = forwardRef<HTMLInputElement, Props>(
-  ({ label, error, name, ...props }, ref) => {
+  ({ label, error, name, className, ...props }, ref) => {
     return (
       <div className="grid gap-2">
         <Label htmlFor={name}>{label}</Label>
@@ -17,7 +17,7 @@ const FormTextInput = forwardRef<HTMLInputElement, Props>(
           id={name}
           name={name}
           ref={ref}
-          className={cn(error ? "ring-red-500 ring-1" : "")}
+          className={cn(className, error ? "ring-red-500 ring-1" : "")}
           {...props}
         />
         <p className="text-red-500">{error}</p>
