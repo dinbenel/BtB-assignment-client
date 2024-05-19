@@ -11,6 +11,7 @@ export const headerStr = {
   episode: "episodes",
   title: "rick&morty info",
   logOut: "logout",
+  login: "login",
 } as const;
 
 export const characterPageStr = {

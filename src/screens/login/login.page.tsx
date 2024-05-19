@@ -21,7 +21,7 @@ const Login = () => {
     }
   }, [user]);
   return (
-    <div>
+    <div className="flex justify-center pt-4">
       <Card className="w-full max-w-sm">
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>

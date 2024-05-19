@@ -1,10 +1,11 @@
 import { routeNames } from "@/constants/routeNames";
 import { headerStr } from "@/constants/stringRes";
+import UserMenuItem from "@/shared/UserMenuItem/UserMenuItem.component";
 import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/avatar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/popover";
 import { useUserStore } from "@/store/user.store";
 import { UserCircle2 } from "lucide-react";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const UserMenu = () => {
@@ -41,36 +42,41 @@ const UserMenu = () => {
         sideOffset={10}
         className="w-32 p-0 text-center capitalize font-normal"
       >
-        <div
-          className="p-2 hover:bg-muted cursor-pointer"
-          onClick={() => onClickMenuItem(routeNames.home)}
-        >
-          {headerStr.home}
-        </div>
-        <hr className="h-[1px] bg-muted w-full cursor-pointer" />
-        <div
-          className="p-2 hover:bg-muted cursor-pointer"
-          onClick={() => onClickMenuItem(routeNames.episode)}
-        >
-          {headerStr.episode}
-        </div>
-        <hr className="h-[1px] bg-muted w-full" />
-        <div
-          className="p-2 hover:bg-muted cursor-pointer"
-          onClick={() => onClickMenuItem(routeNames.location)}
-        >
-          {headerStr.location}
-        </div>
-        <hr className="h-[1px] bg-muted w-full" />
-        <div
-          className="p-2 hover:bg-muted cursor-pointer"
-          onClick={() => {
-            logout();
-            setIsMenuOpen(false);
-          }}
-        >
-          {headerStr.logOut}
-        </div>
+        {user && (
+          <>
+            <UserMenuItem
+              label={headerStr.home}
+              onClickMenuItem={onClickMenuItem}
+              path={routeNames.home}
+            />
+            <UserMenuItem
+              label={headerStr.episode}
+              onClickMenuItem={onClickMenuItem}
+              path={routeNames.episode}
+            />
+            <UserMenuItem
+              label={headerStr.location}
+              onClickMenuItem={onClickMenuItem}
+              path={routeNames.location}
+            />
+          </>
+        )}
+        {user ? (
+          <UserMenuItem
+            label={headerStr.logOut}
+            onClickMenuItem={() => {
+              logout();
+              setIsMenuOpen(false);
+            }}
+            path={""}
+          />
+        ) : (
+          <UserMenuItem
+            label={headerStr.login}
+            onClickMenuItem={onClickMenuItem}
+            path={routeNames.login}
+          />
+        )}
       </PopoverContent>
     </Popover>
   );

@@ -104,7 +104,7 @@ const CharacterSearchForm = () => {
           }}
         />
 
-        <Button className="">{characterPageStr.search}</Button>
+        <Button className="bg-accent">{characterPageStr.search}</Button>
       </form>
     </div>
   );

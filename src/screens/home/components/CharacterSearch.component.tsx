@@ -24,7 +24,7 @@ const CharacterSearch = () => {
 
   return (
     <FormProvider {...formMethods}>
-      <div className="sm:hidden">
+      <div className="hidden md:block">
         <CharacterSearchForm />
       </div>
       <Button

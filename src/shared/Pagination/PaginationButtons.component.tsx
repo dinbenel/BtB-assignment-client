@@ -26,21 +26,25 @@ const PaginationButtons: FC<Props> = ({
 }) => {
   return (
     <Pagination>
-      <PaginationContent>
+      <PaginationContent className="p-0">
         <PaginationItem className="cursor-pointer">
           <PaginationPrevious onClick={onPrev} />
         </PaginationItem>
         {visiblePages.map((page) => (
-          <PaginationItem key={page}>
-            <PaginationLink href="#" onClick={() => onClickPage(page)}>
+          <PaginationItem className="hidden md:block" key={page}>
+            <PaginationLink
+              size={"sm"}
+              href="#"
+              onClick={() => onClickPage(page)}
+            >
               {page}
             </PaginationLink>
           </PaginationItem>
         ))}
-        <PaginationItem>
+        <PaginationItem className="hidden md:block">
           <PaginationEllipsis />
         </PaginationItem>
-        <PaginationItem className="cursor-pointer">
+        <PaginationItem className="cursor-pointer hidden md:block">
           <PaginationLink onClick={() => onClickPage(pages)}>
             {pages}
           </PaginationLink>

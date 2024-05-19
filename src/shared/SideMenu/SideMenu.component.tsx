@@ -14,7 +14,7 @@ const SideMenu = () => {
   return (
     <div>
       <Sheet onOpenChange={onOpenSideMenu} open={isOpen}>
-        <SheetContent>open</SheetContent>
+        <SheetContent className="w-1/2 flex md:hidden"></SheetContent>
       </Sheet>
     </div>
   );

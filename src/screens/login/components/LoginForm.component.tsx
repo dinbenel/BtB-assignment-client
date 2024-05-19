@@ -55,7 +55,7 @@ const LoginForm = () => {
           );
         }}
       />
-      <Button>{loginPageStr.submit}</Button>
+      <Button className="bg-accent w-full">{loginPageStr.submit}</Button>
     </form>
   );
 };
