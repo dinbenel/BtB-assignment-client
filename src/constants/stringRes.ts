@@ -15,10 +15,10 @@ export const headerStr = {
 } as const;
 
 export const characterPageStr = {
-  gender: "gender",
+  gender: "Gender",
   name: "name",
-  species: "species",
-  status: "status",
+  species: "Secies",
+  status: "Status",
   type: "type",
   search: "search",
   dialogTitle: "search character",

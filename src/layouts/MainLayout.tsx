@@ -1,4 +1,5 @@
 import Header from "@/shared/AppHeader/Header.component";
+import SideMenu from "@/shared/SideMenu/SideMenu.component";
 import { Outlet } from "react-router-dom";
 
 const MainLayout = () => {
@@ -8,6 +9,7 @@ const MainLayout = () => {
       <main className="container h-full">
         <Outlet />
       </main>
+      <SideMenu />
     </div>
   );
 };

@@ -1,7 +1,6 @@
+import { headerStr } from "@/constants/stringRes";
 import { Link } from "react-router-dom";
 import { routeNames } from "../../constants/routeNames";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { headerStr } from "@/constants/stringRes";
 import UserMenu from "./components/UserMenu.component";
 import UserMobileMenu from "./components/UserMobileMenu.component";
 
