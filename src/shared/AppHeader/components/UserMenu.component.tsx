@@ -5,8 +5,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/avatar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/popover";
 import { useUserStore } from "@/store/user.store";
 import { UserCircle2 } from "lucide-react";
-import { useId, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const UserMenu = () => {
   const { user, logout } = useUserStore((state) => ({
