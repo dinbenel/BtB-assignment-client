@@ -1,24 +1,28 @@
+import { Button } from "@/shared/ui/button";
+import { useCharacterStore } from "@/store/character.store";
 import {
   SearchCharacterValidationSchema,
   SearchFormState,
 } from "@/validations/searchCharacterValidation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
-import CharacterSearchForm from "./CharacterSearchForm.component";
+import { useLocation } from "react-router-dom";
 import CharacterSearchDialog from "./CharacterSearchDialog.component";
-import { Button } from "@/shared/ui/button";
-import { useCharacterStore } from "@/store/character.store";
+import CharacterSearchForm from "./CharacterSearchForm.component";
 
 const CharacterSearch = () => {
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+
   const setDialogOpen = useCharacterStore((state) => state.setDialogOpen);
   const formMethods = useForm<SearchFormState>({
     resolver: zodResolver(SearchCharacterValidationSchema),
     defaultValues: {
-      gender: "",
-      name: "",
-      species: "",
-      status: "",
-      type: "",
+      gender: params.get("gender") || "",
+      name: params.get("name") || "",
+      species: params.get("species") || "",
+      status: params.get("status") || "",
+      type: params.get("type") || "",
     },
   });
 

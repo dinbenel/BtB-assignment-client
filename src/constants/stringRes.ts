@@ -23,4 +23,5 @@ export const characterPageStr = {
   search: "search",
   dialogTitle: "search character",
   dialogSubTitle: "search your favorite character",
+  reset: "reset",
 } as const;

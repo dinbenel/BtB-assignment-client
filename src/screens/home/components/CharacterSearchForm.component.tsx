@@ -3,26 +3,41 @@ import FormSelectInput from "@/shared/FormSelectInput/FormSelectInput.component"
 import FormTextInput from "@/shared/FormTextInput/FormTextInput.component";
 import { Button } from "@/shared/ui/button";
 import { useCharacterStore } from "@/store/character.store";
+import { getSearchParamsFromState } from "@/utils/helpers";
 import { cn } from "@/utils/style";
 import { SearchFormState } from "@/validations/searchCharacterValidation";
 import { Controller, SubmitHandler, useFormContext } from "react-hook-form";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const CharacterSearchForm = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const {
     control,
     reset,
     formState: { errors },
     handleSubmit,
   } = useFormContext<SearchFormState>();
-  const { getAllCharacters, setDialogOpen } = useCharacterStore((state) => ({
-    getAllCharacters: state.getAllCharacters,
-    setDialogOpen: state.setDialogOpen,
-  }));
+  const { getAllCharacters, setDialogOpen, resetFiltered } = useCharacterStore(
+    (state) => ({
+      getAllCharacters: state.getAllCharacters,
+      setDialogOpen: state.setDialogOpen,
+      resetFiltered: state.resetFiltered,
+    })
+  );
 
   const onSearch: SubmitHandler<SearchFormState> = async (formState) => {
-    await getAllCharacters(formState);
+    const params = getSearchParamsFromState(formState);
+    await getAllCharacters(params);
+    navigate(`?${params}`);
     setDialogOpen(false);
+  };
+
+  const onResetForm = async () => {
+    await getAllCharacters();
     reset();
+    navigate(location.pathname);
+    resetFiltered();
   };
 
   return (
@@ -103,8 +118,21 @@ const CharacterSearchForm = () => {
             );
           }}
         />
-
-        <Button className="bg-accent">{characterPageStr.search}</Button>
+        <div className="flex gap-2 w-full justify-between">
+          <Button
+            className="bg-accent hover:bg-accent/50 flex-grow"
+            type="submit"
+          >
+            {characterPageStr.search}
+          </Button>
+          <Button
+            className="flex-grow bg-teal-300 hover:bg-teal-300/50"
+            type="button"
+            onClick={onResetForm}
+          >
+            {characterPageStr.reset}
+          </Button>
+        </div>
       </form>
     </div>
   );
