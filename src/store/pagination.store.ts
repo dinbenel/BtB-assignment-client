@@ -1,6 +1,5 @@
 import { dataApi } from "@/api/data.api";
 import { create } from "zustand";
-import { useCharacterStore } from "./character.store";
 
 type TStore = {
   count: number;
@@ -8,9 +7,9 @@ type TStore = {
   currPage: number;
   next: string | null;
   prev: string | null;
-  setCurrentPage: (page: number) => Promise<void>;
-  onNext: () => Promise<void>;
-  onPrev: () => Promise<void>;
+  setCurrentPage: (page: number) => Promise<any>;
+  onNext: () => Promise<any>;
+  onPrev: () => Promise<any>;
 };
 
 export const usePaginationStore = create<TStore>((set, get) => ({
@@ -21,9 +20,7 @@ export const usePaginationStore = create<TStore>((set, get) => ({
   prev: null,
   async setCurrentPage(page: number) {
     try {
-      useCharacterStore.setState({ isLoading: true });
       const { data } = await dataApi.getCharactersByPage(page);
-      useCharacterStore.setState({ characters: data.results });
       set({
         next: data.info.next,
         prev: data.info.prev,
@@ -31,19 +28,17 @@ export const usePaginationStore = create<TStore>((set, get) => ({
         pages: data.info.pages,
         currPage: page,
       });
+      return data;
     } catch (error) {
       console.log(error);
-    } finally {
-      useCharacterStore.setState({ isLoading: false });
+      return;
     }
   },
   async onNext() {
     const { next, currPage, pages } = get();
     if (!next || currPage >= pages) return;
     try {
-      useCharacterStore.setState({ isLoading: true });
       const { data } = await dataApi.getCharactersByLink(next);
-      useCharacterStore.setState({ characters: data.results });
       set({
         currPage: currPage + 1,
         next: data.info.next,
@@ -51,19 +46,17 @@ export const usePaginationStore = create<TStore>((set, get) => ({
         count: data.info.count,
         pages: data.info.pages,
       });
+      return data;
     } catch (error) {
       console.log(error);
-    } finally {
-      useCharacterStore.setState({ isLoading: false });
+      return;
     }
   },
   async onPrev() {
     const { prev, currPage } = get();
     if (!prev || currPage <= 1) return;
     try {
-      useCharacterStore.setState({ isLoading: true });
       const { data } = await dataApi.getCharactersByLink(prev);
-      useCharacterStore.setState({ characters: data.results });
       set({
         currPage: currPage - 1,
         next: data.info.next,
@@ -71,10 +64,10 @@ export const usePaginationStore = create<TStore>((set, get) => ({
         count: data.info.count,
         pages: data.info.pages,
       });
+      return data;
     } catch (error) {
       console.log(error);
-    } finally {
-      useCharacterStore.setState({ isLoading: false });
+      return;
     }
   },
 }));

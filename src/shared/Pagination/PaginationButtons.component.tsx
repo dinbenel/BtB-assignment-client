@@ -1,12 +1,11 @@
 import { FC } from "react";
+import PaginationButton from "../paginationButton/PaginationButton.component";
 import {
   Pagination,
   PaginationContent,
   PaginationEllipsis,
   PaginationItem,
   PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
 } from "../ui/pagination";
 
 type Props = {
@@ -15,6 +14,9 @@ type Props = {
   onClickPage: (page: number) => void;
   visiblePages: number[];
   pages: number;
+  next: string | null;
+  prev: string | null;
+  currPage: number;
 };
 
 const PaginationButtons: FC<Props> = ({
@@ -23,24 +25,33 @@ const PaginationButtons: FC<Props> = ({
   visiblePages,
   onClickPage,
   pages,
+  next,
+  prev,
+  currPage,
 }) => {
   return (
     <Pagination>
       <PaginationContent className="p-0">
         <PaginationItem className="cursor-pointer">
-          <PaginationPrevious onClick={onPrev} />
+          <PaginationButton
+            onClick={() => onPrev()}
+            label={"Previous"}
+            isDisabled={!Boolean(prev)}
+          />
         </PaginationItem>
-        {visiblePages.map((page) => (
-          <PaginationItem className="hidden md:block" key={page}>
-            <PaginationLink
-              size={"sm"}
-              href="#"
-              onClick={() => onClickPage(page)}
-            >
-              {page}
-            </PaginationLink>
-          </PaginationItem>
-        ))}
+        {visiblePages.map((page) => {
+          const isSelected = currPage === page;
+          return (
+            <PaginationItem className="hidden md:block" key={page}>
+              <PaginationButton
+                onClick={() => onClickPage(page)}
+                label={page.toString()}
+                isDisabled={false}
+                className={isSelected ? "bg-muted" : ""}
+              />
+            </PaginationItem>
+          );
+        })}
         <PaginationItem className="hidden md:block">
           <PaginationEllipsis />
         </PaginationItem>
@@ -50,7 +61,11 @@ const PaginationButtons: FC<Props> = ({
           </PaginationLink>
         </PaginationItem>
         <PaginationItem className="cursor-pointer">
-          <PaginationNext onClick={onNext} />
+          <PaginationButton
+            onClick={() => onNext()}
+            label={"next"}
+            isDisabled={!Boolean(next)}
+          />
         </PaginationItem>
       </PaginationContent>
     </Pagination>
