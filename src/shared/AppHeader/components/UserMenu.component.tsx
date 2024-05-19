@@ -4,15 +4,30 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/avatar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/popover";
 import { useUserStore } from "@/store/user.store";
 import { UserCircle2 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const UserMenu = () => {
-  const user = useUserStore((state) => state.loggedUser);
+  const { user, logout } = useUserStore((state) => ({
+    user: state.loggedUser,
+    logout: state.logout,
+  }));
   const userAvatar = user ? "https://github.com/shadcn.png" : "";
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const navigate = useNavigate();
+
+  const onClickMenuItem = (path: string) => {
+    navigate(path);
+    setIsMenuOpen(false);
+  };
 
   return (
-    <Popover>
-      <PopoverTrigger asChild className="cursor-pointer">
+    <Popover open={isMenuOpen}>
+      <PopoverTrigger
+        asChild
+        className="cursor-pointer"
+        onClick={() => setIsMenuOpen((prev) => !prev)}
+      >
         <Avatar>
           <AvatarImage src={userAvatar} alt="@shadcn" />
           <AvatarFallback className="bg-transparent">
@@ -26,24 +41,35 @@ const UserMenu = () => {
         sideOffset={10}
         className="w-32 p-0 text-center capitalize font-normal"
       >
-        <div className="p-2 hover:bg-muted">
-          <Link to={routeNames.home}>{headerStr.home}</Link>
+        <div
+          className="p-2 hover:bg-muted cursor-pointer"
+          onClick={() => onClickMenuItem(routeNames.home)}
+        >
+          {headerStr.home}
+        </div>
+        <hr className="h-[1px] bg-muted w-full cursor-pointer" />
+        <div
+          className="p-2 hover:bg-muted cursor-pointer"
+          onClick={() => onClickMenuItem(routeNames.episode)}
+        >
+          {headerStr.episode}
         </div>
         <hr className="h-[1px] bg-muted w-full" />
-        <div className="p-2 hover:bg-muted">
-          <Link to={routeNames.home}>{headerStr.episode}</Link>
+        <div
+          className="p-2 hover:bg-muted cursor-pointer"
+          onClick={() => onClickMenuItem(routeNames.location)}
+        >
+          {headerStr.location}
         </div>
         <hr className="h-[1px] bg-muted w-full" />
-        <div className="p-2 hover:bg-muted">
-          <Link to={routeNames.home}>{headerStr.char}</Link>
-        </div>
-        <hr className="h-[1px] bg-muted w-full" />
-        <div className="p-2 hover:bg-muted">
-          <Link to={routeNames.home}>{headerStr.location}</Link>
-        </div>
-        <hr className="h-[1px] bg-muted w-full" />
-        <div className="p-2 hover:bg-muted">
-          <Link to={routeNames.home}>{headerStr.logOut}</Link>
+        <div
+          className="p-2 hover:bg-muted cursor-pointer"
+          onClick={() => {
+            logout();
+            setIsMenuOpen(false);
+          }}
+        >
+          {headerStr.logOut}
         </div>
       </PopoverContent>
     </Popover>

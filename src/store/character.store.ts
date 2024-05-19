@@ -7,12 +7,15 @@ import { usePaginationStore } from "./pagination.store";
 type TStore = {
   characters: ICharacter[];
   isLoading: boolean;
+  isDialogOpen: boolean;
+  setDialogOpen: (isOpen: boolean) => void;
   getAllCharacters: (vals?: SearchFormState) => Promise<void>;
 };
 
 export const useCharacterStore = create<TStore>((set) => ({
   characters: [],
   isLoading: false,
+  isDialogOpen: false,
   async getAllCharacters(vlas) {
     try {
       set({ isLoading: true });
@@ -29,5 +32,8 @@ export const useCharacterStore = create<TStore>((set) => ({
     } finally {
       set({ isLoading: false });
     }
+  },
+  setDialogOpen(isOpen) {
+    set({ isDialogOpen: isOpen });
   },
 }));

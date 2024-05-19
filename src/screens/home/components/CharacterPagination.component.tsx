@@ -1,13 +1,5 @@
 import useVisiblePages from "@/hooks/useGetVisiblePage";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/shared/ui/pagination";
+import PaginationButtons from "@/shared/Pagination/PaginationButtons.component";
 import { usePaginationStore } from "@/store/pagination.store";
 
 const CharacterPagination = () => {
@@ -34,33 +26,13 @@ const CharacterPagination = () => {
   };
 
   return (
-    <div className="">
-      <Pagination>
-        <PaginationContent>
-          <PaginationItem className="cursor-pointer">
-            <PaginationPrevious onClick={onPrev} />
-          </PaginationItem>
-          {visiblePages.map((page) => (
-            <PaginationItem key={page}>
-              <PaginationLink href="#" onClick={() => onClickPage(page)}>
-                {page}
-              </PaginationLink>
-            </PaginationItem>
-          ))}
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-          <PaginationItem className="cursor-pointer">
-            <PaginationLink onClick={() => onClickPage(pages)}>
-              {pages}
-            </PaginationLink>
-          </PaginationItem>
-          <PaginationItem className="cursor-pointer">
-            <PaginationNext onClick={onNext} />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
-    </div>
+    <PaginationButtons
+      onClickPage={onClickPage}
+      onNext={onNext}
+      onPrev={onPrev}
+      pages={pages}
+      visiblePages={visiblePages}
+    />
   );
 };
 

@@ -11,6 +11,7 @@ type TStore = {
   loggedUser: IUser | undefined;
   getLoggedUser: () => Promise<void>;
   login: (formState: loginFormState) => Promise<void>;
+  logout: () => void;
 };
 
 export const useUserStore = create<TStore>((set) => ({
@@ -48,5 +49,9 @@ export const useUserStore = create<TStore>((set) => ({
     } finally {
       set({ isLoading: false });
     }
+  },
+  logout() {
+    set({ loggedUser: undefined });
+    setToStorage(config.tokenStorageKey, "");
   },
 }));

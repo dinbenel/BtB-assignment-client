@@ -20,4 +20,6 @@ export const characterPageStr = {
   status: "status",
   type: "type",
   search: "search",
+  dialogTitle: "search character",
+  dialogSubTitle: "search your favorite character",
 } as const;
