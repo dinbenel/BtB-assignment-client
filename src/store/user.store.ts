@@ -17,16 +17,7 @@ type TStore = {
 export const useUserStore = create<TStore>((set) => ({
   isLoading: false,
   token: getFromStorage(config.tokenStorageKey),
-  loggedUser: {
-    id: "bc2e6d1a-53fe-4518-b4ce-adfe9dbd97c8",
-    email: "din@dino.com",
-    firsName: "din",
-    password: "1234567",
-    lastName: "dino",
-    role: "ADMIN",
-    createdAt: "2024-05-16T14:06:53.748Z",
-    updatedAt: "2024-05-16T14:06:53.748Z",
-  },
+  loggedUser: undefined,
   async getLoggedUser() {
     try {
       set({ isLoading: true });
