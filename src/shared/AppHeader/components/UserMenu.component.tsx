@@ -50,9 +50,9 @@ const UserMenu = () => {
               path={routeNames.home}
             />
             <UserMenuItem
-              label={headerStr.episode}
+              label={headerStr.char}
               onClickMenuItem={onClickMenuItem}
-              path={routeNames.episode}
+              path={routeNames.characters}
             />
             <UserMenuItem
               label={headerStr.location}

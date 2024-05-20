@@ -126,7 +126,7 @@ const CharacterSearchForm = () => {
             {characterPageStr.search}
           </Button>
           <Button
-            className="flex-grow bg-teal-300 hover:bg-teal-300/50"
+            className="flex-grow bg-secondary hover:bg-secondary/50"
             type="button"
             onClick={onResetForm}
           >

@@ -1,7 +1,7 @@
-import CharacterCard from "@/screens/home/components/CharacterCard.component";
 import { ICharacter } from "@/types/character.type";
 import { FC } from "react";
 import NoResidents from "./NoResidents.component";
+import CharacterCard from "@/screens/character/components/CharacterCard.component";
 
 type Props = {
   residents: ICharacter[];

@@ -32,3 +32,10 @@ export const locationPageStr = {
   created: "Created",
   viewResidents: "view residents",
 } as const;
+
+export const homePageStr = {
+  title: "welcome to the rick & morty info",
+  subTitle: "search info about your favorite characters",
+  locationLink: "locations",
+  characterLink: "characters",
+} as const;

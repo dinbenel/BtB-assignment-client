@@ -20,6 +20,8 @@ const LocationResidentsDialog = () => {
     })
   );
 
+  if (!residents.length) return null;
+
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className="sm:max-w-[70%] mt-4 p-2">
@@ -27,6 +29,7 @@ const LocationResidentsDialog = () => {
           <DialogTitle className="capitalize">
             {locationPageStr.dialogTitle}
           </DialogTitle>
+
           {isLoading ? (
             <LoadingSpinner />
           ) : (
