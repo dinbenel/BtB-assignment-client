@@ -6,6 +6,7 @@ import { ICharacter } from "@/types/character.type";
 
 type TStore = {
   locations: ILocation[];
+  filteredLocations: ILocation[];
   residents: ICharacter[];
   selectedLocations: ILocation | undefined;
   isLoading: boolean;
@@ -18,6 +19,7 @@ type TStore = {
 
 export const useLocationStore = create<TStore>((set) => ({
   locations: [],
+  filteredLocations: [],
   selectedLocations: undefined,
   residents: [],
   isLoading: false,
@@ -35,7 +37,7 @@ export const useLocationStore = create<TStore>((set) => ({
         currPage: page ?? 1,
       }));
       if (url) {
-        // set({ filteredCharacters: data.results });O
+        set({ filteredLocations: data.results });
         return;
       }
       set({ locations: data.results });

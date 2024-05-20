@@ -3,11 +3,14 @@ import { useEffect } from "react";
 import LocationCard from "./LocationCard.component";
 
 const LocationList = () => {
-  const { locations, getAll, isLoading } = useLocationStore((state) => ({
-    getAll: state.getAllLocations,
-    locations: state.locations,
-    isLoading: state.isLoading,
-  }));
+  const { locations, getAll, isLoading, filtered } = useLocationStore(
+    (state) => ({
+      getAll: state.getAllLocations,
+      locations: state.locations,
+      isLoading: state.isLoading,
+      filtered: state.filteredLocations,
+    })
+  );
 
   useEffect(() => {
     getAll();
@@ -16,8 +19,8 @@ const LocationList = () => {
   if (isLoading) return <p>Loading...</p>;
 
   return (
-    <section className="grid grid-cols-1 xs:grid-cols-2 justify-items-center md:grid-cols-3 lg:grid-cols-4 gap-2 md:max-h-[calc(100vh-350px)] lg:max-h-[calc(100vh-300px)] max-h-[calc(100vh-160px)] p-2 overflow-y-auto">
-      {locations?.map((l) => {
+    <section className="flex-grow grid grid-cols-1 xs:grid-cols-2 justify-items-center md:grid-cols-3 lg:grid-cols-4 gap-2 md:max-h-[calc(100vh-130px)] max-h-[calc(100vh-110px)] p-2 overflow-y-auto">
+      {(filtered.length ? filtered : locations)?.map((l) => {
         return <LocationCard key={l.created + l.id} location={l} />;
       })}
     </section>
