@@ -1,31 +1,42 @@
-# React + TypeScript + Vite
+# Rick and Morty Info App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules using pnpm
-as a package manager.
+![License](https://img.shields.io/github/license/your-username/your-repo-name)
+![Issues](https://img.shields.io/github/issues/your-username/your-repo-name)
+![Forks](https://img.shields.io/github/forks/your-username/your-repo-name)
+![Stars](https://img.shields.io/github/stars/your-username/your-repo-name)
 
-to install pnpm use `npm install -g pnpm`
-and run the project with `pnpm run dev`.
+A React-based application that provides information about characters, episodes, and locations from the Rick and Morty universe using the [Rick and Morty API](https://rickandmortyapi.com/).
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Features](#features)
+- [Demo](#demo)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+- [Acknowledgements](#acknowledgements)
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Browse and search for characters from the Rick and Morty series.
+- View detailed information about each character and location.
+- Responsive design for mobile and desktop.
 
-- Configure the top-level `parserOptions` property like this:
+## Installation
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+- run pnpm i to install dependencies.
+- if using yarn or npm delete the pnpm-lock.yaml and run yarn i or npm i
+
+### Prerequisites
+
+- Node.js (v14 or later)
+- npm (v6 or later) or yarn (v1.22 or later)
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/your-username/your-repo-name.git
+cd your-repo-name
+npm run dev | yarn dev | pnpm dev
 ```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
