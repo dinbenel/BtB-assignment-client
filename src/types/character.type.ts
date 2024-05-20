@@ -1,6 +1,6 @@
-export interface IApiRes {
+export interface IApiRes<T> {
   info: IResInfo;
-  results: ICharacter[];
+  results: T[];
 }
 
 export interface ICharacter {

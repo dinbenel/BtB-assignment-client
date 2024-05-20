@@ -25,3 +25,10 @@ export const characterPageStr = {
   dialogSubTitle: "search your favorite character",
   reset: "reset",
 } as const;
+
+export const locationPageStr = {
+  dialogTitle: "Residents",
+  reset: "reset",
+  created: "Created",
+  viewResidents: "view residents",
+} as const;
